@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     //MARK: Properties
     @IBOutlet weak var textInput: UITextView!
     @IBOutlet weak var outputResults: UILabel!
@@ -20,11 +20,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-    //Check inputed text for s' and t's
     
+    //Check inputed text for s' and t's
     @IBAction func analyze(_ sender: Any) {
-     // Reset label everytime button is pressed
+        // Reset label everytime button is pressed
         outputResults.text = ""
         
         // Protect against no input
@@ -33,7 +32,31 @@ class ViewController: UIViewController {
             return
         }
         
+        // Variables to count S' and T's
+        var sCount = 0
+        var tCount = 0
+        
+        // Iterate over every character in message
+        for singleCharacter in enteredMessage {
+            switch singleCharacter{
+            case "s", "S":
+                sCount += 1
+            case "t", "T":
+                tCount += 1
+            default: print("")
+            }
+            
+            // Output results
+            if sCount > tCount  {
+                outputResults.text = "This is probably French text."
+            } else if tCount > sCount {
+                outputResults.text = "This is probably English text."
+                
+            } else {
+                outputResults.text = "This is probably French text."
+            }
+        }
+        
     }
     
 }
-
